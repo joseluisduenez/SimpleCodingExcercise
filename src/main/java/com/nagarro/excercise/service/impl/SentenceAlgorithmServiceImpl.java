@@ -2,23 +2,19 @@ package com.nagarro.excercise.service.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.nagarro.excercise.service.SentenceAlgorithmService;
+import com.nagarro.excercise.util.StringUtil;
 
 public class SentenceAlgorithmServiceImpl implements  SentenceAlgorithmService{
-
-	private static final String BLANK_SPACE = " ";
 	
 	/*Entry point for algorithm, returns all words in a sentence
 	 * */
 	@Override
 	public String replaceWord(String[] input) {
-		Queue<String> separators = getSeparators(input);
+		Queue<String> separators = StringUtil.getSeparators(input);
 		List<String> inputOrdered = orderInputSentence(input);
 		StringBuilder result = new StringBuilder();
 		
@@ -35,7 +31,7 @@ public class SentenceAlgorithmServiceImpl implements  SentenceAlgorithmService{
 		Integer wordSize = input.length();
 		String result;
 		if(wordSize>1)
-			result = getFirstCharacter(input).concat(getDistinctCharacters(input).toString()).concat(getLastCharacter(input));
+			result = StringUtil.getFirstCharacter(input).concat(getDistinctCharacters(input).toString()).concat(StringUtil.getLastCharacter(input));
 		else
 			result = input;
 
@@ -46,11 +42,7 @@ public class SentenceAlgorithmServiceImpl implements  SentenceAlgorithmService{
 	 * */
 	private Integer getDistinctCharacters(String input) {
 		input = input.substring(1, input.length() - 1);
-		
-		Set<Character> charsSet = input.chars()
-			    .mapToObj(e->(char)e).collect(Collectors.toSet());
-
-		return charsSet.size();
+		return StringUtil.getNumberOfDistinctCharacters(input);
 	}
 	
 	/*Store each word as a list element
@@ -68,40 +60,4 @@ public class SentenceAlgorithmServiceImpl implements  SentenceAlgorithmService{
 
 		return result;
 	}
-	
-	/*Get separators from input String and storing them in a queue for a FIFO behavior
-	 * */
-	private Queue<String> getSeparators(String[] input) {
-		Queue<String> separators = new LinkedList<>();
-
-		for(int x=0; x<input.length; x++) {
-			String innerResult = input[x].replaceAll("[a-zA-Z0-9]", "");
-			if(!innerResult.equals("")) {
-				char[]  listChars = innerResult.toCharArray();
-				for(int y= 0; y<listChars.length; y++) {
-					separators.offer(String.valueOf(listChars[y]));
-				}	
-			}
-			else
-				separators.offer(BLANK_SPACE);
-		}
-		
-		return separators;
-	}
-	
-	/*Get the First Character from a given String
-	 * */
-	private String getFirstCharacter(String input) {
-        char[] charArray = input.toCharArray();
-        return String.valueOf(charArray[0]);
-	}
-	
-	/*Get the last Character from a given String
-	 * */
-	private String getLastCharacter(String input) {
-       char[] charArray = input.toCharArray();
-       int n = charArray.length;  
-       return String.valueOf(charArray[n - 1]);
-	}
-
 }
