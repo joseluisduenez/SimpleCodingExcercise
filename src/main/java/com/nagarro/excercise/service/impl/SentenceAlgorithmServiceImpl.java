@@ -45,14 +45,12 @@ public class SentenceAlgorithmServiceImpl implements  SentenceAlgorithmService{
 	/*Get the number of distinct Characters from a given string
 	 * */
 	private Integer getDistinctCharacters(String input) {
-		Integer result = 0;
 		input = input.substring(1, input.length() - 1);
 		
 		Set<Character> charsSet = input.chars()
 			    .mapToObj(e->(char)e).collect(Collectors.toSet());
-		result = charsSet.size();
 
-		return result;
+		return charsSet.size();
 	}
 	
 	/*Store each word as a list element
