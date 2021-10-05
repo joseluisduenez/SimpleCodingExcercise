@@ -23,7 +23,7 @@ public class SentenceAlgorithmServiceImpl implements  SentenceAlgorithmService{
 		StringBuilder result = new StringBuilder();
 		
 		 inputOrdered.stream().forEach((word)-> { 
-			 result.append(buildWord(word));
+			 result.append(buildWord(word.trim()));
 			 result.append(separators.peek()!=null?separators.poll():""); });
 		 
 		return result.toString();
