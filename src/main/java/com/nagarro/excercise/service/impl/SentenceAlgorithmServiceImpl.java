@@ -18,7 +18,7 @@ public class SentenceAlgorithmServiceImpl implements  SentenceAlgorithmService{
 		List<String> inputOrdered = orderInputSentence(input);
 		StringBuilder result = new StringBuilder();
 		
-		 inputOrdered.stream().forEach((word)-> { 
+		inputOrdered.stream().forEach((word)-> { 
 			 result.append(buildWord(word.trim()));
 			 result.append(separators.peek()!=null?separators.poll():""); });
 		 
