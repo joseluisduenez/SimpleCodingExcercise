@@ -1,0 +1,9 @@
+JAVA +1.8 Required
+MAVEN required
+
+#RUN APPLICATION EXAMPLE:
+mvn exec:java -Dexec.args="It was many and many a year ago"
+
+OR
+
+mvn exec:java -Dexec.args="Copyright,Microsoft:Corporation"
