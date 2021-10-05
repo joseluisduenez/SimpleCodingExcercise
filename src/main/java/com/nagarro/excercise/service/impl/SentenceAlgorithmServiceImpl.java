@@ -33,10 +33,9 @@ public class SentenceAlgorithmServiceImpl implements  SentenceAlgorithmService{
 	 * */
 	private String buildWord(String input) {
 		Integer wordSize = input.length();
-		Integer numberOfDistinctCharachters = getDistinctCharacters(input);
 		String result;
 		if(wordSize>1)
-			result = getFirstCharacter(input).concat(numberOfDistinctCharachters.toString()).concat(getLastCharacter(input));
+			result = getFirstCharacter(input).concat(getDistinctCharacters(input).toString()).concat(getLastCharacter(input));
 		else
 			result = input;
 
@@ -47,15 +46,12 @@ public class SentenceAlgorithmServiceImpl implements  SentenceAlgorithmService{
 	 * */
 	private Integer getDistinctCharacters(String input) {
 		Integer result = 0;
-		
-		if(input.length()>1) {
-			input = input.substring(1, input.length() - 1);
+		input = input.substring(1, input.length() - 1);
 		
 		Set<Character> charsSet = input.chars()
 			    .mapToObj(e->(char)e).collect(Collectors.toSet());
 		result = charsSet.size();
-		}
-		
+
 		return result;
 	}
 	
